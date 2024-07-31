@@ -23,19 +23,91 @@ $(document).ready(function() {
         return salarioBruto - (salarioBruto * (retencion / 100))
     }
 
+    function colorDepartamento(departamento) {
+        switch (departamento) {
+            case "Tecnología":
+                return "text-bg-primary"
+            break;
+
+            case "Talento Humano":
+                return "text-bg-warning"
+            break;
+
+            case "Administración":
+                return "text-bg-info"
+            break;
+        
+            default:
+                return "text-bg-dark"
+            break;
+        }
+    }
+
+    function colorRetencion(retencion) {
+        var color = ""
+        switch (retencion) {
+            case 0:
+                color = "bg-danger-subtle"
+            break;
+
+            case 5:
+                color = "bg-warning-subtle"
+            break;
+
+            case 8:
+                color = "bg-success-subtle"
+            break;
+        
+            default:
+                color = "bg-body-tertiary"
+            break;
+        }
+
+        return color;
+    }
+
+    // Ejemplo ciclo FOR
+    // function listarColaboradores(colaboradores) {
+    //     $("#listado tbody").html("")
+    //     for (let index = 0; index < colaboradores.length; index++) {
+    //         var colorDep = colorDepartamento(colaboradores[index].departamento)
+    //         var colorRet = colorRetencion(colaboradores[index].retencion)
+    //         $("#listado tbody").append(`
+    //             <tr>
+    //                 <td>${colaboradores[index].rut}</td>
+    //                 <td>${colaboradores[index].nombre}</td>
+    //                 <td>
+    //                     <span class="badge ${colorDep}">${colaboradores[index].departamento}</span>
+    //                 </td>
+    //                 <td class="text-end">${colaboradores[index].salario_bruto}</td>
+    //                 <td class="${colorRet} text-center">${colaboradores[index].retencion}%</td>
+    //                 <td class="text-end">${colaboradores[index].salario_neto}</td>
+    //             </tr>    
+    //         `) 
+    //     }
+    // }
+
+
+    // Ejemplo ciclo While
     function listarColaboradores(colaboradores) {
         $("#listado tbody").html("")
-        for (let index = 0; index < colaboradores.length; index++) {
+        var index = 0
+        while(index < colaboradores.length) {
+            var colorDep = colorDepartamento(colaboradores[index].departamento)
+            var colorRet = colorRetencion(colaboradores[index].retencion)
             $("#listado tbody").append(`
                 <tr>
                     <td>${colaboradores[index].rut}</td>
                     <td>${colaboradores[index].nombre}</td>
-                    <td>${colaboradores[index].departamento}</td>
-                    <td>${colaboradores[index].salario_bruto}</td>
-                    <td>${colaboradores[index].retencion}</td>
-                    <td>${colaboradores[index].salario_neto}</td>
+                    <td>
+                        <span class="badge ${colorDep}">${colaboradores[index].departamento}</span>
+                    </td>
+                    <td class="text-end">${colaboradores[index].salario_bruto}</td>
+                    <td class="${colorRet} text-center">${colaboradores[index].retencion}%</td>
+                    <td class="text-end">${colaboradores[index].salario_neto}</td>
                 </tr>    
             `) 
+            index++
         }
     }
 
